@@ -16,9 +16,11 @@ if __name__ == "__main__":
         batch_request=batch_req, create_expectation_suite_with_name="test_batch_suite"
     )
 
-    val.expect_table_row_count_to_be_between(min_value=0, max_value=10)
     val.expect_column_values_to_be_in_set("Sex", ["male", "female"])
+    val.expect_table_row_count_to_be_between(min_value=0, max_value=10)
+    val.expect_column_values_to_be_in_set("PClass", ["1st", "2nd", "3rd"])
 
-    val.save_expectation_suite(discard_failed_expectations=False)
-
-    context.build_data_docs()
+    val.save_expectation_suite(
+        "expecations.json",
+        discard_failed_expectations=False,
+    )
